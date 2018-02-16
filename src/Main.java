@@ -27,16 +27,9 @@ public class Main {
         view.addMouseListener(new MouseHandler(view));
 
         world.start();
-
         world.setGravity(40);
 
-        for (int x = -26; x <= 26; x++){
-            Environment grass = new Environment(world, new Vec2(x, -10), EnvTexture.GRASS);
-        }
-
-        for (int x = -26; x <= 26; x++){
-            Environment stone = new Environment(world, new Vec2(x, -12), EnvTexture.STONE);
-        }
+        WorldRenderer renderer = new WorldRenderer(world);
 
         Crate crate = new Crate(world, new Vec2(0, 0));
 

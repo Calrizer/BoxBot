@@ -48,14 +48,6 @@ public class Environment extends StaticBody{
 
     public void render(World world){
 
-        for (int x = -24; x <= 24; x++){
-            Environment grass = new Environment(world, new Vec2(x, -12), EnvTexture.SHADOW25);
-        }
-
-        for (int x = -24; x <= 24; x++){
-            Environment stone = new Environment(world, new Vec2(x, -14), EnvTexture.SHADOW25);
-        }
-
         for (int x = -26; x <= 26; x++){
             Environment shadow = new Environment(world, new Vec2(x, -12), EnvTexture.GRASS);
         }

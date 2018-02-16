@@ -83,23 +83,19 @@ public class KeyboardHandler extends KeyAdapter implements StepListener {
 
         if (isHeadingUp){
             bot.applyImpulse(new Vec2(0,25));
-            bot.removeAllImages();
-            bot.addImage(new BodyImage("assets/bot/2.png", 2));
+            bot.updateTexture(BotTexture.UP);
         }else if (isHeadingUp == false){
-            bot.removeAllImages();
-            bot.addImage(new BodyImage("assets/bot/4.png", 2));
+            bot.updateTexture(BotTexture.DOWN);
         }
 
         if (isHeadingLeft){
             bot.applyImpulse(new Vec2(-15,0));
-            bot.removeAllImages();
-            bot.addImage(new BodyImage("assets/bot/2.png", 2));
+            bot.updateTexture(BotTexture.DOWN);
         }
 
         if (isHeadingRight) {
             bot.applyImpulse(new Vec2(15, 0));
-            bot.removeAllImages();
-            bot.addImage(new BodyImage("assets/bot/2.png", 2));
+            bot.updateTexture(BotTexture.DOWN);
         }
 
     }
