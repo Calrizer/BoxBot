@@ -6,6 +6,8 @@ import java.util.Timer;
 
 public class Main {
 
+    private static Bot bot;
+
     public static void main(String[] args) {
 
         World world = new World();
@@ -33,7 +35,7 @@ public class Main {
 
         Crate crate = new Crate(world, new Vec2(0, 0));
 
-        Bot bot = new Bot(world, new Vec2(-16, 0));
+        bot = new Bot(world, new Vec2(-16, 0));
 
         frame.addKeyListener(new KeyboardHandler(view, world, bot));
 
@@ -42,4 +44,9 @@ public class Main {
         mainMenu.render();
 
     }
+
+    public Bot getBot(){
+        return bot;
+    }
+
 }

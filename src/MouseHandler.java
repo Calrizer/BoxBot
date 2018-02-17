@@ -11,7 +11,9 @@ public class MouseHandler extends MouseAdapter {
     private WorldView view;
 
     public MouseHandler(WorldView view) {
+
         this.view = view;
+
     }
 
     /**

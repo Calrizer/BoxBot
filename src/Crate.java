@@ -9,9 +9,11 @@ public class Crate extends DynamicBody{
 
     public Crate(World world, Vec2 position) {
 
-        super(world, new BoxShape(0.9f,0.9f));
+        super(world, new BoxShape(1,1));
         this.addImage(new BodyImage("assets/env/crate.png", 2));
         this.setPosition(position);
+
+        this.setName("Crate");
 
     }
 
