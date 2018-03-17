@@ -3,21 +3,74 @@ import sun.font.TrueTypeFont;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
 public class GamePanel extends JPanel {
 
     private Image background;
+    private MainView view;
 
-    public GamePanel(GridBagLayout layout, int blobs, int boxesUsed){
+    public GamePanel(MainView view, InterfaceRenderer interfaceRenderer, GridBagLayout layout, int blobs, int boxesUsed, boolean paused){
 
         super(layout);
 
+        this.view = view;
         this.background = new ImageIcon("assets/env/stonelayer.png").getImage();
 
-        JButton resume = new JButton("Resume");
+        JButton resume = new JButton();
+
+        if (paused){
+
+            resume.setText("Resume");
+
+            resume.addActionListener(new ActionListener() {
+
+                @Override
+                public void actionPerformed(ActionEvent e) {
+
+                    resume.setText("Pause");
+                    view.getWorld().start();
+                    interfaceRenderer.render(0,0, false);
+
+                }
+
+            });
+
+        }else{
+
+            resume.setText("Pause");
+
+            resume.addActionListener(new ActionListener() {
+
+                @Override
+                public void actionPerformed(ActionEvent e) {
+
+                    resume.setText("Resume");
+                    view.getWorld().stop();
+                    interfaceRenderer.render(0,0, true);
+
+                }
+
+            });
+
+        }
+
         JButton menu = new JButton("Main Menu");
+
+        menu.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                interfaceRenderer.renderMenuPanel();
+
+            }
+
+        });
+
         JButton exit = new JButton("Exit");
 
         JLabel escaped = new JLabel("Blobs Escaped: " + blobs);

@@ -43,7 +43,7 @@ public class Blob extends Walker implements CollisionListener, StepListener{
             this.giveDamage(10);
         }else if (e.getOtherBody().getName() == "wall"){
             this.destroy();
-            interfaceRenderer.render(1,0);
+            interfaceRenderer.render(1,0, false);
         }
 
     }

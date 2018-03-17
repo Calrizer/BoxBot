@@ -1,9 +1,13 @@
+import city.cs.engine.Body;
+import com.sun.javaws.util.JfxHelper;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class InterfaceRenderer {
 
     private JFrame frame;
+    private MainView view;
     private JSplitPane splitPane;
     private GamePanel gamePanel;
 
@@ -13,13 +17,14 @@ public class InterfaceRenderer {
     public InterfaceRenderer(JFrame frame, MainView view){
 
         this.frame = frame;
+        this.view = view;
         this.splitPane = new JSplitPane();
-        this.gamePanel = new GamePanel(new GridBagLayout(), 0, 0);
+        this.gamePanel = new GamePanel(view, this, new GridBagLayout(), 0, 0, false);
 
         this.splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
         this.splitPane.setDividerLocation(500);
         this.splitPane.setTopComponent(view);
-        this.splitPane.setBottomComponent(gamePanel);
+        this.splitPane.setBottomComponent(new MenuPanel(new GridBagLayout()));
         this.splitPane.setEnabled(false);
 
         this.frame.setPreferredSize(new Dimension(1000, 566));
@@ -37,12 +42,33 @@ public class InterfaceRenderer {
 
     }
 
-    public void render(int blobs, int boxes){
+    public void render(int blobs, int boxes, boolean paused){
 
         this.blobCount = this.blobCount + blobs;
         this.boxCount = this.boxCount + boxes;
 
-        this.splitPane.setBottomComponent(new GamePanel(new GridBagLayout(), this.blobCount,this.boxCount));
+        this.splitPane.setBottomComponent(new GamePanel(this.view, this, new GridBagLayout(), this.blobCount,this.boxCount, paused));
+
+        this.frame.toFront();
+        this.frame.requestFocus();
+
+    }
+
+    public void renderMenuPanel(){
+
+        for (Body body: this.view.getWorld().getDynamicBodies()) {
+            body.destroy();
+        }
+
+        new LevelManager(this.view.getWorld(), this.frame, this);
+
+        this.splitPane.setBottomComponent(new MenuPanel(new GridBagLayout()));
+
+        this.frame.toFront();
+        this.frame.requestFocus();
+
+        this.view.getWorld().start();
+
 
     }
 

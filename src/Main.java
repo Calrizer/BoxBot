@@ -20,28 +20,6 @@ public class Main {
 
         InterfaceRenderer interfaceRenderer = new InterfaceRenderer(frame, view);
 
-//        JSplitPane splitPane = new JSplitPane();
-//        GamePanel gamePanel = new GamePanel(new GridBagLayout());
-//
-//        splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
-//        splitPane.setDividerLocation(500);
-//        splitPane.setTopComponent(view);
-//        splitPane.setBottomComponent(gamePanel);
-//        splitPane.setEnabled(false);
-//
-//        frame.setPreferredSize(new Dimension(1000, 566));
-//
-//        frame.add(splitPane);
-//
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        frame.setLocationByPlatform(true);
-//        frame.setResizable(false);
-//        frame.pack();
-//        frame.setVisible(true);
-//        frame.setLayout(new BorderLayout());
-//        frame.toFront();
-//        frame.requestFocus();
-
         //JFrame debugView = new DebugViewer(world, 1000, 500);
 
         view.addMouseListener(new MouseHandler(view));
@@ -52,12 +30,6 @@ public class Main {
         new WorldRenderer(world);
 
         new LevelManager(world, frame, interfaceRenderer);
-
-        //bot = new Bot(world, new Vec2(-16, -4));
-
-        //frame.addKeyListener(new KeyboardHandler(view, world, bot));
-
-        //Blob blob = new Blob(world, new Vec2(16, 0));
 
     }
 

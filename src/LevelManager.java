@@ -40,6 +40,7 @@ public class LevelManager implements KeyListener {
 
             case ONE:
                 this.levelOne = new LevelOne(this, world, frame);
+                renderInterface(0,0);
                 break;
 
         }
@@ -64,12 +65,14 @@ public class LevelManager implements KeyListener {
 
     public void renderInterface(int blobs, int boxes){
 
-        this.interfaceRenderer.render(blobs, boxes);
+        this.interfaceRenderer.render(blobs, boxes, false);
 
     }
 
     public InterfaceRenderer getInterfaceRenderer() {
+
         return interfaceRenderer;
+
     }
 
     @Override
