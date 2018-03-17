@@ -1,17 +1,15 @@
+
 import city.cs.engine.*;
 import org.jbox2d.common.Vec2;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.BufferedWriter;
-import java.io.Console;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.security.Key;
 
 public class KeyboardHandler extends KeyAdapter implements StepListener {
 
-    private WorldView view;
     private World world;
     private Bot bot;
 
@@ -19,8 +17,8 @@ public class KeyboardHandler extends KeyAdapter implements StepListener {
     private boolean isHeadingLeft;
     private boolean isHeadingRight;
 
-    public KeyboardHandler(WorldView view, World world, Bot bot) {
-        this.view = view;
+    public KeyboardHandler(World world, Bot bot) {
+
         this.world = world;
         this.bot = bot;
 
@@ -31,24 +29,28 @@ public class KeyboardHandler extends KeyAdapter implements StepListener {
     @Override
     public void keyPressed(KeyEvent e) {
 
-        char key = e.getKeyChar();
+        int key = e.getKeyCode();
 
         switch (key){
 
-            case 'w':
+            case 87:
                 isHeadingUp = true;
                 break;
-            case 'a':
+            case 65:
                 isHeadingLeft = true;
                 break;
-            case 's':
-                System.out.println("s pressed.");
+            case 83:
                 bot.removeAllImages();
                 bot.addImage(new BodyImage("assets/bot/4.png", 2));
                 break;
-            case 'd':
+            case 68:
                 isHeadingRight = true;
                 break;
+            case 32:
+                Crate crate = new FlyingCrate(world, new Vec2(bot.getPosition().x + 2, bot.getPosition().y));
+                crate.applyImpulse(new Vec2(30, 5));
+                break;
+
         }
 
     }
@@ -56,20 +58,20 @@ public class KeyboardHandler extends KeyAdapter implements StepListener {
     @Override
     public void keyReleased(KeyEvent e){
 
-        char key = e.getKeyChar();
+        int key = e.getKeyCode();
 
         switch (key){
 
-            case 'w':
+            case 87:
                 isHeadingUp = false;
                 break;
-            case 'a':
+            case 65:
                 isHeadingLeft = false;
                 break;
-            case 's':
+            case 83:
 
                 break;
-            case 'd':
+            case 68:
                 isHeadingRight = false;
                 break;
         }
@@ -103,7 +105,7 @@ public class KeyboardHandler extends KeyAdapter implements StepListener {
     @Override
     public void postStep(StepEvent e){
 
-
+        //Just a stub.//
 
     }
 

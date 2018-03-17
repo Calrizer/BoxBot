@@ -5,14 +5,14 @@ import city.cs.engine.World;
 import org.jbox2d.common.Vec2;
 
 enum EnvTexture {
-    GRASS, STONE, SHADOW25, SHADOW50, SHADOW75, SHADOW100
+    GRASS, GRASSLAYER, STONE, SHADOW25, SHADOW50, SHADOW75, SHADOW100
 }
 
 public class Environment extends StaticBody{
 
-    public Environment(World world, Vec2 position, EnvTexture texture){
+    public Environment(World world, Vec2 position, Vec2 size, EnvTexture texture){
 
-        super(world, new BoxShape(0.9f, 0.9f));
+        super(world, new BoxShape(size.x, size.y));
 
         switch (texture){
 
@@ -20,8 +20,12 @@ public class Environment extends StaticBody{
                 this.addImage(new BodyImage("assets/env/grass.png", 2));
                 break;
 
+            case GRASSLAYER:
+                this.addImage(new BodyImage("assets/env/grasslayer.png", 2));
+                break;
+
             case STONE:
-                this.addImage(new BodyImage("assets/env/n.png", 2));
+                this.addImage(new BodyImage("assets/env/stonelayer.png", 2));
                 break;
 
             case SHADOW25:
@@ -48,13 +52,7 @@ public class Environment extends StaticBody{
 
     public void render(World world){
 
-        for (int x = -26; x <= 26; x++){
-            Environment shadow = new Environment(world, new Vec2(x, -12), EnvTexture.GRASS);
-        }
 
-        for (int x = -26; x <= 26; x++){
-            Environment shadow = new Environment(world, new Vec2(x, -14), EnvTexture.STONE);
-        }
 
     }
 

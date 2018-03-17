@@ -1,6 +1,8 @@
+
 import city.cs.engine.*;
 import org.jbox2d.common.Vec2;
-import javax.swing.JFrame;
+
+import javax.swing.*;
 import java.awt.*;
 import java.util.Timer;
 
@@ -12,18 +14,34 @@ public class Main {
 
         World world = new World();
 
-        UserView view = new UserView(world, 1000, 500);
+        MainView view = new MainView(world, 1000, 500);
 
         final JFrame frame = new JFrame("BoxBot");
 
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLocationByPlatform(true);
-        frame.add(view);
-        frame.setResizable(false);
-        frame.pack();
-        frame.setVisible(true);
+        InterfaceRenderer interfaceRenderer = new InterfaceRenderer(frame, view);
 
-        // Uncomment this to make a debugging view
+//        JSplitPane splitPane = new JSplitPane();
+//        GamePanel gamePanel = new GamePanel(new GridBagLayout());
+//
+//        splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
+//        splitPane.setDividerLocation(500);
+//        splitPane.setTopComponent(view);
+//        splitPane.setBottomComponent(gamePanel);
+//        splitPane.setEnabled(false);
+//
+//        frame.setPreferredSize(new Dimension(1000, 566));
+//
+//        frame.add(splitPane);
+//
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        frame.setLocationByPlatform(true);
+//        frame.setResizable(false);
+//        frame.pack();
+//        frame.setVisible(true);
+//        frame.setLayout(new BorderLayout());
+//        frame.toFront();
+//        frame.requestFocus();
+
         //JFrame debugView = new DebugViewer(world, 1000, 500);
 
         view.addMouseListener(new MouseHandler(view));
@@ -31,17 +49,15 @@ public class Main {
         world.start();
         world.setGravity(40);
 
-        WorldRenderer renderer = new WorldRenderer(world);
+        new WorldRenderer(world);
 
-        Crate crate = new Crate(world, new Vec2(0, 0));
+        new LevelManager(world, frame, interfaceRenderer);
 
-        bot = new Bot(world, new Vec2(-16, 0));
+        //bot = new Bot(world, new Vec2(-16, -4));
 
-        frame.addKeyListener(new KeyboardHandler(view, world, bot));
+        //frame.addKeyListener(new KeyboardHandler(view, world, bot));
 
-        Menu mainMenu = new Menu();
-
-        mainMenu.render();
+        //Blob blob = new Blob(world, new Vec2(16, 0));
 
     }
 
