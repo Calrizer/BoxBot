@@ -66,6 +66,8 @@ public class GamePanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
 
                 interfaceRenderer.renderMenuPanel();
+                interfaceRenderer.getLevelManager().stopLevel(interfaceRenderer.getLevelManager().getCurrentLevel());
+                interfaceRenderer.getLevelManager().startLevel(LevelContext.MENU);
 
             }
 

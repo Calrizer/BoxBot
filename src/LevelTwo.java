@@ -5,10 +5,8 @@ import city.cs.engine.World;
 import org.jbox2d.common.Vec2;
 
 import javax.swing.*;
-import java.util.ArrayList;
-import java.util.List;
 
-public class LevelOne implements Level, StepListener{
+public class LevelTwo implements Level, StepListener{
 
     private LevelManager levelManager;
     private World world;
@@ -16,8 +14,9 @@ public class LevelOne implements Level, StepListener{
 
     private int time = 0;
     private int blobs;
+    private int skulls;
 
-    public LevelOne(LevelManager levelManager, World world, JFrame frame){
+    public LevelTwo(LevelManager levelManager, World world, JFrame frame){
 
         this.levelManager = levelManager;
         this.world = world;
@@ -75,7 +74,6 @@ public class LevelOne implements Level, StepListener{
             if (!found){
 
                 levelManager.stopLevel(LevelContext.ONE);
-                levelManager.startLevel(LevelContext.TWO);
 
             }
 

@@ -6,6 +6,7 @@ import java.awt.*;
 
 public class InterfaceRenderer {
 
+    private LevelManager levelManager;
     private JFrame frame;
     private MainView view;
     private JSplitPane splitPane;
@@ -60,7 +61,8 @@ public class InterfaceRenderer {
             body.destroy();
         }
 
-        new LevelManager(this.view.getWorld(), this.frame, this);
+        this.getLevelManager().stopLevel(this.getLevelManager().getCurrentLevel());
+        this.getLevelManager().startLevel(LevelContext.MENU);
 
         this.splitPane.setBottomComponent(new MenuPanel(new GridBagLayout()));
 
@@ -69,7 +71,17 @@ public class InterfaceRenderer {
 
         this.view.getWorld().start();
 
+    }
+
+    public void addLevelManager(LevelManager levelManager){
+
+        this.levelManager = levelManager;
 
     }
 
+    public LevelManager getLevelManager() {
+
+        return levelManager;
+
+    }
 }

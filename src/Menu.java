@@ -44,6 +44,7 @@ public class Menu implements Level, StepListener, KeyListener{
 
         boxBotText.destroy();
         levelManager.stopLevel(LevelContext.MENU);
+        world.removeStepListener(this);
 
     }
 

@@ -29,7 +29,9 @@ public class Main {
 
         new WorldRenderer(world);
 
-        new LevelManager(world, frame, interfaceRenderer);
+        LevelManager levelManager = new LevelManager(world, frame, interfaceRenderer);
+
+        interfaceRenderer.addLevelManager(levelManager);
 
     }
 

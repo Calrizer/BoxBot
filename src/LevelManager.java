@@ -1,4 +1,5 @@
 
+import city.cs.engine.Body;
 import city.cs.engine.World;
 
 import javax.swing.*;
@@ -38,7 +39,12 @@ public class LevelManager implements KeyListener {
 
         switch (level){
 
+            case MENU:
+                this.currentLevel = LevelContext.MENU;
+                this.menu = new Menu(this, world, frame);
+                break;
             case ONE:
+                this.currentLevel = LevelContext.ONE;
                 this.levelOne = new LevelOne(this, world, frame);
                 renderInterface(0,0);
                 break;
@@ -53,9 +59,12 @@ public class LevelManager implements KeyListener {
 
             case MENU:
                 this.menu = null;
+                clearBodies();
                 startLevel(LevelContext.ONE);
                 break;
             case ONE:
+                clearBodies();
+                this.levelOne.end();
                 this.levelOne = null;
                 break;
 
@@ -72,6 +81,20 @@ public class LevelManager implements KeyListener {
     public InterfaceRenderer getInterfaceRenderer() {
 
         return interfaceRenderer;
+
+    }
+
+    public LevelContext getCurrentLevel() {
+
+        return currentLevel;
+
+    }
+
+    public void clearBodies(){
+
+        for (Body body: this.world.getDynamicBodies()){
+            body.destroy();
+        }
 
     }
 
