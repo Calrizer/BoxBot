@@ -75,6 +75,17 @@ public class GamePanel extends JPanel {
 
         JButton exit = new JButton("Exit");
 
+        exit.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                System.exit(0);
+
+            }
+
+        });
+
         JLabel escaped = new JLabel("Blobs Escaped: " + blobs);
         JLabel boxes = new JLabel("Boxes Used: " + boxesUsed);
 

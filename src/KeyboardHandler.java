@@ -10,6 +10,7 @@ import java.io.IOException;
 
 public class KeyboardHandler extends KeyAdapter implements StepListener {
 
+    private InterfaceRenderer interfaceRenderer;
     private World world;
     private Bot bot;
 
@@ -17,8 +18,9 @@ public class KeyboardHandler extends KeyAdapter implements StepListener {
     private boolean isHeadingLeft;
     private boolean isHeadingRight;
 
-    public KeyboardHandler(World world, Bot bot) {
+    public KeyboardHandler(InterfaceRenderer interfaceRenderer, World world, Bot bot) {
 
+        this.interfaceRenderer = interfaceRenderer;
         this.world = world;
         this.bot = bot;
 
@@ -47,6 +49,7 @@ public class KeyboardHandler extends KeyAdapter implements StepListener {
                 isHeadingRight = true;
                 break;
             case 32:
+                interfaceRenderer.render(0, 1, false);
                 Crate crate = new FlyingCrate(world, new Vec2(bot.getPosition().x + 2, bot.getPosition().y));
                 crate.applyImpulse(new Vec2(30, 5));
                 break;
@@ -106,15 +109,6 @@ public class KeyboardHandler extends KeyAdapter implements StepListener {
     public void postStep(StepEvent e){
 
         //Just a stub.//
-
-    }
-
-    public void writeToFile(String data) throws IOException {
-
-        BufferedWriter writer = new BufferedWriter(new FileWriter("data/moveContext.txt"));
-        writer.write(data);
-
-        writer.close();
 
     }
 

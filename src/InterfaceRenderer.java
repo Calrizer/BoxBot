@@ -61,9 +61,6 @@ public class InterfaceRenderer {
             body.destroy();
         }
 
-//        this.getLevelManager().stopLevel(this.getLevelManager().getCurrentLevel());
-//        this.getLevelManager().startLevel(LevelContext.MENU);
-
         this.splitPane.setBottomComponent(new MenuPanel(new GridBagLayout()));
 
         this.frame.toFront();
@@ -82,6 +79,18 @@ public class InterfaceRenderer {
     public LevelManager getLevelManager() {
 
         return levelManager;
+
+    }
+
+    public int getBlobCount() {
+
+        return blobCount;
+
+    }
+
+    public int getBoxCount() {
+
+        return boxCount;
 
     }
 }

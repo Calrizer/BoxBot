@@ -6,18 +6,20 @@ import org.jbox2d.common.Vec2;
 
 import javax.swing.*;
 import java.awt.event.KeyListener;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 
-public class LevelTwo implements Level, StepListener{
+public class LevelThree implements Level, StepListener{
 
     private LevelManager levelManager;
     private World world;
     private JFrame frame;
 
     private int time = 0;
-    private int blobs;
-    private int skulls;
+    private int ufos;
 
-    public LevelTwo(LevelManager levelManager, World world, JFrame frame){
+    public LevelThree(LevelManager levelManager, World world, JFrame frame){
 
         this.levelManager = levelManager;
         this.world = world;
@@ -54,14 +56,14 @@ public class LevelTwo implements Level, StepListener{
     @Override
     public void preStep(StepEvent e){
 
-        if (skulls <= 40){
+        if (ufos <= 40){
 
             time++;
 
             if (time % 20 == 0){
 
-                new Skull(this.levelManager.getInterfaceRenderer(), world, new Vec2(25, -4));
-                skulls++;
+                new UFO(this.levelManager.getInterfaceRenderer(), world, new Vec2(25, -4));
+                ufos++;
 
             }
 
@@ -71,7 +73,7 @@ public class LevelTwo implements Level, StepListener{
 
             for (Body body: this.world.getDynamicBodies()) {
 
-                if (body.getName() == "Skull"){
+                if (body.getName() == "Ufo"){
                     found = true;
                 }
 
@@ -79,8 +81,15 @@ public class LevelTwo implements Level, StepListener{
 
             if (!found){
 
-                levelManager.stopLevel(LevelContext.TWO);
-                levelManager.startLevel(LevelContext.THREE);
+                levelManager.stopLevel(LevelContext.THREE);
+                levelManager.startLevel(LevelContext.MENU);
+
+                try {
+                    writeToFile("High Score - Blobs Lost: " + levelManager.getInterfaceRenderer().getBlobCount() + " Crates Fired: " + levelManager.getInterfaceRenderer().getBoxCount());
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+
 
             }
 
@@ -91,7 +100,16 @@ public class LevelTwo implements Level, StepListener{
     @Override
     public void postStep(StepEvent e){
 
+        //Just a stub.//
 
+    }
+
+    public void writeToFile(String data) throws IOException {
+
+        BufferedWriter writer = new BufferedWriter(new FileWriter("data/highScore.txt"));
+        writer.write(data);
+
+        writer.close();
 
     }
 

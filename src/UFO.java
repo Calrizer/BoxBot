@@ -1,23 +1,23 @@
 import city.cs.engine.*;
 import org.jbox2d.common.Vec2;
 
-public class Skull extends Walker implements CollisionListener, StepListener{
+public class UFO extends Walker implements CollisionListener, StepListener{
 
     private InterfaceRenderer interfaceRenderer;
 
     private int health = 10;
-    private int time;
+    private int time = 20;
 
-    public Skull(InterfaceRenderer interfaceRenderer, World world, Vec2 position) {
+    public UFO(InterfaceRenderer interfaceRenderer, World world, Vec2 position) {
 
         super(world, new BoxShape(0.75f,0.75f));
 
         this.interfaceRenderer = interfaceRenderer;
 
-        this.addImage(new BodyImage("assets/skull/1.png", 1.5f));
+        this.addImage(new BodyImage("assets/ufo/ufo.png", 1.5f));
         this.setPosition(position);
 
-        this.setName("Skull");
+        this.setName("Ufo");
         this.addCollisionListener(this);
         world.addStepListener(this);
 
@@ -53,11 +53,13 @@ public class Skull extends Walker implements CollisionListener, StepListener{
 
         time++;
 
-        if (time % 40 == 0){
+        if (time % 20 == 0){
 
-            this.applyImpulse(new Vec2(-100, 200));
+            this.applyImpulse(new Vec2(-75, 150));
 
         }
+
+
 
     }
 

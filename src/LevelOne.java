@@ -1,3 +1,4 @@
+
 import city.cs.engine.Body;
 import city.cs.engine.StepEvent;
 import city.cs.engine.StepListener;
@@ -27,7 +28,7 @@ public class LevelOne implements Level, StepListener{
         Bot bot = new Bot(world, new Vec2(-16, -4));
 
         world.addStepListener(this);
-        frame.addKeyListener(new KeyboardHandler(world, bot));
+        frame.addKeyListener(new KeyboardHandler(levelManager.getInterfaceRenderer(), world, bot));
 
         start();
 
@@ -46,7 +47,7 @@ public class LevelOne implements Level, StepListener{
         for (KeyListener listener : frame.getKeyListeners()) {
             frame.removeKeyListener(listener);
         }
-        
+
         world.removeStepListener(this);
         System.out.println("finished");
 
