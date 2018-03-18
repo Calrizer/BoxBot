@@ -61,8 +61,8 @@ public class InterfaceRenderer {
             body.destroy();
         }
 
-        this.getLevelManager().stopLevel(this.getLevelManager().getCurrentLevel());
-        this.getLevelManager().startLevel(LevelContext.MENU);
+//        this.getLevelManager().stopLevel(this.getLevelManager().getCurrentLevel());
+//        this.getLevelManager().startLevel(LevelContext.MENU);
 
         this.splitPane.setBottomComponent(new MenuPanel(new GridBagLayout()));
 

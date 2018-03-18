@@ -49,7 +49,7 @@ public class LevelTwo implements Level, StepListener{
     @Override
     public void preStep(StepEvent e){
 
-        if (blobs <= 40){
+        if (blobs <= 40 && skulls <= 10){
 
             time++;
 
@@ -57,6 +57,12 @@ public class LevelTwo implements Level, StepListener{
                 new Blob(this.levelManager.getInterfaceRenderer(), world, new Vec2(24, -4));
                 time = 0;
                 blobs++;
+            }
+
+            if (time % 60 == 0){
+                new Skull(this.levelManager.getInterfaceRenderer(), world, new Vec2(26, -2));
+                time = 0;
+                skulls++;
             }
 
         }else{

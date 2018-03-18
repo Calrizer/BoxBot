@@ -20,6 +20,7 @@ public class LevelManager implements KeyListener {
 
     private Menu menu;
     private LevelOne levelOne;
+    private LevelTwo levelTwo;
 
     private boolean paused = false;
 
@@ -48,6 +49,11 @@ public class LevelManager implements KeyListener {
                 this.levelOne = new LevelOne(this, world, frame);
                 renderInterface(0,0);
                 break;
+            case TWO:
+                this.currentLevel = LevelContext.TWO;
+                this.levelTwo = new LevelTwo(this, world, frame);
+                renderInterface(0,0);
+                break;
 
         }
 
@@ -66,6 +72,11 @@ public class LevelManager implements KeyListener {
                 clearBodies();
                 this.levelOne.end();
                 this.levelOne = null;
+                break;
+            case TWO:
+                clearBodies();
+                this.levelTwo.end();
+                this.levelTwo = null;
                 break;
 
         }

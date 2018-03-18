@@ -5,6 +5,7 @@ import city.cs.engine.World;
 import org.jbox2d.common.Vec2;
 
 import javax.swing.*;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,6 +43,10 @@ public class LevelOne implements Level, StepListener{
     @Override
     public void end() {
 
+        for (KeyListener listener : frame.getKeyListeners()) {
+            frame.removeKeyListener(listener);
+        }
+        
         world.removeStepListener(this);
         System.out.println("finished");
 
