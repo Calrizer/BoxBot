@@ -70,6 +70,12 @@ public class InterfaceRenderer {
 
     }
 
+    public void changeBackground(int level){
+
+        this.splitPane.setTopComponent(new MainView(view.getWorld(), 1000, 500, level));
+
+    }
+
     public void addLevelManager(LevelManager levelManager){
 
         this.levelManager = levelManager;

@@ -25,6 +25,8 @@ public class LevelTwo implements Level, StepListener{
 
         Bot bot = new Bot(world, new Vec2(-16, -4));
 
+        new Pickup(this.world, new Vec2(0,0));
+
         world.addStepListener(this);
         frame.addKeyListener(new KeyboardHandler(levelManager.getInterfaceRenderer(), world, bot));
 
@@ -35,7 +37,7 @@ public class LevelTwo implements Level, StepListener{
     @Override
     public void start() {
 
-
+        this.levelManager.getInterfaceRenderer().changeBackground(2);
 
     }
 

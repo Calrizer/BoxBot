@@ -21,6 +21,9 @@ public class Skull extends Walker implements CollisionListener, StepListener{
         this.addCollisionListener(this);
         world.addStepListener(this);
 
+        GhostlyFixture fixture = new GhostlyFixture(this, new BoxShape(0.75f,0.75f));
+        fixture.setDensity(0.5f);
+
         this.startWalking(-7);
 
     }

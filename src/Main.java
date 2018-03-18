@@ -14,7 +14,7 @@ public class Main {
 
         World world = new World();
 
-        MainView view = new MainView(world, 1000, 500);
+        MainView view = new MainView(world, 1000, 500, 1);
 
         final JFrame frame = new JFrame("BoxBot");
 

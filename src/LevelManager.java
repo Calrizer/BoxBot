@@ -72,7 +72,7 @@ public class LevelManager implements KeyListener {
             case MENU:
                 this.menu = null;
                 clearBodies();
-                startLevel(LevelContext.THREE);
+                startLevel(LevelContext.ONE);
                 break;
             case ONE:
                 clearBodies();

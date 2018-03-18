@@ -9,10 +9,22 @@ public class MainView extends UserView{
 
     private Image background;
 
-    public MainView(World world, int width, int height) {
+    public MainView(World world, int width, int height, int level) {
 
         super(world, width, height);
-        this.background = new ImageIcon("assets/env/background.jpg").getImage();
+
+        switch (level){
+
+            case 1:
+                this.background = new ImageIcon("assets/env/background1.jpg").getImage();
+                break;
+            case 2:
+                this.background = new ImageIcon("assets/env/background2.jpg").getImage();
+                break;
+            case 3:
+                this.background = new ImageIcon("assets/env/background3.jpg").getImage();
+                break;
+        }
 
     }
 

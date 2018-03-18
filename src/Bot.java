@@ -16,6 +16,7 @@ public class Bot extends Walker implements CollisionListener, StepListener {
         this.addImage(new BodyImage("assets/bot/4.png", 2));
         this.setPosition(position);
         this.addCollisionListener(this);
+        this.setName("Bot");
         this.world = world;
         world.addStepListener(this);
 
