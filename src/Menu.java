@@ -3,9 +3,12 @@ import city.cs.engine.*;
 import org.jbox2d.common.Vec2;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+
+/**
+ * @author Callum Drain
+ */
 
 public class Menu implements Level, StepListener, KeyListener{
 
@@ -16,6 +19,13 @@ public class Menu implements Level, StepListener, KeyListener{
     private boolean movement = true;
     private boolean ending = false;
     private boolean ended = false;
+
+    /**
+     * Menu is used to render control all of the components that make up the main menu of the game.
+     * @param levelManager Add the current levelManager instance so the menu can be invoked and dismissed.
+     * @param world Add the current world instance so a StepListener can be implemented.
+     * @param frame Add the current frame instance so a KeyListener can be implemented.
+     */
 
     public Menu(LevelManager levelManager, World world, JFrame frame) {
 
@@ -30,6 +40,10 @@ public class Menu implements Level, StepListener, KeyListener{
 
     }
 
+    /**
+     * start is used to start the main menu.
+     */
+
     @Override
     public void start() {
 
@@ -39,6 +53,10 @@ public class Menu implements Level, StepListener, KeyListener{
 
     }
 
+    /**
+     * end is used to stop the main menu. Callback made to levelManager to start the next level.
+     */
+
     @Override
     public void end() {
 
@@ -47,6 +65,11 @@ public class Menu implements Level, StepListener, KeyListener{
         world.removeStepListener(this);
 
     }
+
+    /**
+     * In this context keyPressed is used to close the main menu when the user presses any key to start.
+     * @param e An object containing the KeyPressed event information.
+     */
 
     @Override
     public void keyPressed(KeyEvent e) {
@@ -68,6 +91,11 @@ public class Menu implements Level, StepListener, KeyListener{
         //Just a stub.//
 
     }
+
+    /**
+     * preStep in this context is used to animate the game logo.
+     * @param e An object containing the StepEvent information.
+     */
 
     @Override
     public void preStep(StepEvent e){
@@ -111,7 +139,6 @@ public class Menu implements Level, StepListener, KeyListener{
     public void postStep(StepEvent e){
 
         //Just a stub.//
-
 
     }
 

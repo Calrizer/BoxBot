@@ -1,11 +1,19 @@
-import city.cs.engine.Body;
-import city.cs.engine.StaticBody;
+
 import city.cs.engine.World;
 import org.jbox2d.common.Vec2;
+
+/**
+ * @author Callum Drain
+ */
 
 public class WorldRenderer {
 
     private World world;
+
+    /**
+     * WorldRenderer is used to render the environment of the game world.
+     * @param world Add the current instance of the world that the environment should be rendered onto.
+     */
 
     public WorldRenderer(World world){
 
@@ -13,6 +21,10 @@ public class WorldRenderer {
         this.render();
 
     }
+
+    /**
+     * This is used to render the environment and the bounding walls of the game.
+     */
 
     public void render(){
 

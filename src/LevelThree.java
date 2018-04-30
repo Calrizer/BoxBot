@@ -6,9 +6,7 @@ import org.jbox2d.common.Vec2;
 
 import javax.swing.*;
 import java.awt.event.KeyListener;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
 public class LevelThree implements Level, StepListener{
 
@@ -49,7 +47,6 @@ public class LevelThree implements Level, StepListener{
         }
 
         world.removeStepListener(this);
-        System.out.println("finished");
 
     }
 
@@ -81,15 +78,30 @@ public class LevelThree implements Level, StepListener{
 
             if (!found){
 
-                levelManager.stopLevel(LevelContext.THREE);
-                levelManager.startLevel(LevelContext.MENU);
-
                 try {
-                    writeToFile("High Score - Blobs Lost: " + levelManager.getInterfaceRenderer().getBlobCount() + " Crates Fired: " + levelManager.getInterfaceRenderer().getBoxCount());
+
+                    writeToFile(levelManager.getInterfaceRenderer().getBlobCount(), levelManager.getInterfaceRenderer().getBoxCount());
+
                 } catch (IOException e1) {
-                    e1.printStackTrace();
+
+                    try (FileWriter writer = new FileWriter("data/highScore.txt")) {
+
+                        levelManager.getInterfaceRenderer().setIsNew(true);
+                        levelManager.getInterfaceRenderer().setScore(new int [] {levelManager.getInterfaceRenderer().getBlobCount(), levelManager.getInterfaceRenderer().getBoxCount()});
+
+                        writer.write(levelManager.getInterfaceRenderer().getBlobCount() + "," + levelManager.getInterfaceRenderer().getBoxCount());
+                        writer.flush();
+
+                    }catch (IOException e2){
+
+                        System.out.println("Error creating new highscore file: " + e2);
+
+                    }
+
                 }
 
+                levelManager.stopLevel(LevelContext.THREE);
+                levelManager.startLevel(LevelContext.END);
 
             }
 
@@ -104,12 +116,41 @@ public class LevelThree implements Level, StepListener{
 
     }
 
-    public void writeToFile(String data) throws IOException {
+    public void writeToFile(int blobs, int boxes) throws IOException {
 
-        BufferedWriter writer = new BufferedWriter(new FileWriter("data/highScore.txt"));
-        writer.write(data);
+        BufferedReader reader = new BufferedReader(new FileReader("data/highScore.txt"));
 
-        writer.close();
+        String [] score = reader.readLine().split(",");
+
+        levelManager.getInterfaceRenderer().setScore(new int [] {blobs, boxes});
+
+        if (blobs <= Integer.parseInt(score[0])){
+
+            if (blobs == Integer.parseInt(score[0])){
+
+                if (boxes <= Integer.parseInt(score[1])){
+
+                    levelManager.getInterfaceRenderer().setIsNew(true);
+
+                    BufferedWriter writer = new BufferedWriter(new FileWriter("data/highScore.txt"));
+                    writer.write(blobs + "," + boxes);
+
+                    writer.close();
+
+                }
+
+            }else{
+
+                levelManager.getInterfaceRenderer().setIsNew(true);
+
+                BufferedWriter writer = new BufferedWriter(new FileWriter("data/highScore.txt"));
+                writer.write(blobs + "," + boxes);
+
+                writer.close();
+
+            }
+
+        }
 
     }
 

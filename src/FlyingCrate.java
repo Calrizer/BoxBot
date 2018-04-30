@@ -15,7 +15,7 @@ public class FlyingCrate extends Crate implements CollisionListener, StepListene
     @Override
     public void collide(CollisionEvent e){
 
-        if (e.getOtherBody().getName() == "grass" || e.getOtherBody().getName() == "Blob"){
+        if (e.getOtherBody().getName() == "grass"){
             this.destroy();
         }
 

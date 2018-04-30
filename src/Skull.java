@@ -5,7 +5,7 @@ public class Skull extends Walker implements CollisionListener, StepListener{
 
     private InterfaceRenderer interfaceRenderer;
 
-    private int health = 10;
+    private int health = 30;
     private int time;
 
     public Skull(InterfaceRenderer interfaceRenderer, World world, Vec2 position) {
@@ -29,24 +29,52 @@ public class Skull extends Walker implements CollisionListener, StepListener{
     }
 
     public int getHealth() {
+
         return health;
+
     }
 
     public void giveDamage(int damage) {
+
         this.health = this.health - damage;
-        if (this.health <= 0){
-            this.destroy();
+
+        if (this.health <= 10){
+
+            this.addImage(new BodyImage("assets/skull/red.png", 1.5f));
+
         }
+
+        if (this.health <= 0){
+
+            this.destroy();
+
+        }
+
     }
 
     @Override
     public void collide(CollisionEvent e){
 
         if (e.getOtherBody().getName() == "flyingCrate"){
+
             this.giveDamage(10);
+
+            if (this.health < 0){
+
+                e.getOtherBody().destroy();
+
+            }
+
         }else if (e.getOtherBody().getName() == "wall"){
+
             this.destroy();
             interfaceRenderer.render(1,0, false);
+
+        }else if (e.getOtherBody().getName() == "Bot"){
+
+            this.destroy();
+            interfaceRenderer.render(1,0, false);
+
         }
 
     }
@@ -56,7 +84,7 @@ public class Skull extends Walker implements CollisionListener, StepListener{
 
         time++;
 
-        if (time % 40 == 0){
+        if (time % 40 == 0 && this.health > 10){
 
             this.applyImpulse(new Vec2(-100, 200));
 

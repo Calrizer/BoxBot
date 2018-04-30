@@ -2,9 +2,14 @@
 import city.cs.engine.*;
 import org.jbox2d.common.Vec2;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import java.io.IOException;
+
 public class Pickup extends StaticBody implements CollisionListener{
 
     private World world;
+    private SoundClip pop;
 
     public Pickup(World world, Vec2 position) {
 
@@ -22,6 +27,17 @@ public class Pickup extends StaticBody implements CollisionListener{
     public void collide(CollisionEvent e){
 
         if (e.getOtherBody().getName() == "Bot"){
+
+            try {
+
+                this.pop = new SoundClip("assets/sounds/pop.wav");
+                pop.play();
+
+            }catch (UnsupportedAudioFileException |IOException |LineUnavailableException ex){
+
+                System.out.println("Unable to play pop sound: " + ex);
+
+            }
 
             for (int x = -20; x < 20; x++){
 

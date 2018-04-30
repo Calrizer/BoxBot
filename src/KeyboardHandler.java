@@ -4,9 +4,6 @@ import org.jbox2d.common.Vec2;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
 
 public class KeyboardHandler extends KeyAdapter implements StepListener {
 
@@ -52,6 +49,7 @@ public class KeyboardHandler extends KeyAdapter implements StepListener {
                 interfaceRenderer.render(0, 1, false);
                 Crate crate = new FlyingCrate(world, new Vec2(bot.getPosition().x + 2, bot.getPosition().y));
                 crate.applyImpulse(new Vec2(30, 5));
+
                 break;
 
         }

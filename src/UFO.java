@@ -5,7 +5,7 @@ public class UFO extends Walker implements CollisionListener, StepListener{
 
     private InterfaceRenderer interfaceRenderer;
 
-    private int health = 10;
+    private int health = 50;
     private int time = 20;
 
     public UFO(InterfaceRenderer interfaceRenderer, World world, Vec2 position) {
@@ -26,11 +26,15 @@ public class UFO extends Walker implements CollisionListener, StepListener{
     }
 
     public int getHealth() {
+
         return health;
+
     }
 
     public void giveDamage(int damage) {
+
         this.health = this.health - damage;
+
         if (this.health <= 0){
             this.destroy();
         }
@@ -40,10 +44,35 @@ public class UFO extends Walker implements CollisionListener, StepListener{
     public void collide(CollisionEvent e){
 
         if (e.getOtherBody().getName() == "flyingCrate"){
+
             this.giveDamage(10);
+
+            if (this.health <= 30){
+
+                if (this.health <= 10){
+
+                    this.removeAllImages();
+                    this.addImage(new BodyImage("assets/skull/red.png", 1.5f));
+
+                }else{
+
+                    this.removeAllImages();
+                    this.addImage(new BodyImage("assets/skull/0.png", 1.5f));
+
+                }
+
+            }
+
         }else if (e.getOtherBody().getName() == "wall"){
+
             this.destroy();
             interfaceRenderer.render(1,0, false);
+
+        }else if (e.getOtherBody().getName() == "Bot"){
+
+            this.destroy();
+            interfaceRenderer.render(1,0, false);
+
         }
 
     }
@@ -53,13 +82,11 @@ public class UFO extends Walker implements CollisionListener, StepListener{
 
         time++;
 
-        if (time % 20 == 0){
+        if (time % 20 == 0 && this.health > 30){
 
             this.applyImpulse(new Vec2(-75, 150));
 
         }
-
-
 
     }
 

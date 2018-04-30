@@ -67,6 +67,8 @@ public class GamePanel extends JPanel {
 
                 interfaceRenderer.renderMenuPanel();
                 interfaceRenderer.getLevelManager().stopLevel(interfaceRenderer.getLevelManager().getCurrentLevel());
+                interfaceRenderer.resetBlobCount();
+                interfaceRenderer.resetBoxCount();
                 interfaceRenderer.getLevelManager().startLevel(LevelContext.MENU);
 
             }

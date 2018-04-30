@@ -40,10 +40,19 @@ public class Blob extends Walker implements CollisionListener, StepListener{
     public void collide(CollisionEvent e){
 
         if (e.getOtherBody().getName() == "flyingCrate"){
+
             this.giveDamage(10);
+
         }else if (e.getOtherBody().getName() == "wall"){
+
             this.destroy();
             interfaceRenderer.render(1,0, false);
+
+        }else if (e.getOtherBody().getName() == "Bot"){
+
+            this.destroy();
+            interfaceRenderer.render(1,0, false);
+
         }
 
     }

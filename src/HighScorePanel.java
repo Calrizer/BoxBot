@@ -12,20 +12,26 @@ import java.io.IOException;
  * @author Callum Drain
  */
 
-public class MenuPanel extends JPanel {
+public class HighScorePanel extends JPanel {
 
     private Image background;
+    private boolean isNew;
+    private int [] score;
 
     /**
-     * MenuPanel is used to render the menu bar on the main menu level.
+     * HighScorePanel is used to render the highscore after finishing the game.
      * @param layout Add layout to define the user interface layout.
+     * @param score Add the user's current score.
+     * @param isNew Add if the user has set a new highscore.
      */
 
-    public MenuPanel(GridBagLayout layout){
+    public HighScorePanel(GridBagLayout layout, int [] score, boolean isNew){
 
         super(layout);
 
         this.background = new ImageIcon("assets/env/stonelayer.png").getImage();
+        this.isNew = isNew;
+        this.score = score;
 
         JButton exit = new JButton("Exit");
 
@@ -45,7 +51,17 @@ public class MenuPanel extends JPanel {
         try {
 
             String [] datas = readFile();
-            highscore = new JLabel("Highscore - Blobs Escaped: " + datas[0] + " Boxes Used: " + datas[1]);
+
+            if (this.isNew){
+
+                highscore = new JLabel("New Highscore! - Blobs Escaped: " + datas[0] + " Boxes Used: " + datas[1]);
+
+            }else{
+
+                highscore = new JLabel("Your Score - Blobs Escaped: " + this.score[0] + " Boxes Used: " + this.score[1] + "  |  " + "Highscore - Blobs Escaped: " + datas[0] + " Boxes Used: " + datas[1]);
+
+            }
+
 
         }catch (IOException e){
 

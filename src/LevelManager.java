@@ -3,12 +3,15 @@ import city.cs.engine.Body;
 import city.cs.engine.World;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+/**
+ * @author Callum Drain
+ */
+
 enum LevelContext {
-    MENU, ONE, TWO, THREE
+    MENU, ONE, TWO, THREE, END
 }
 
 public class LevelManager implements KeyListener {
@@ -25,6 +28,13 @@ public class LevelManager implements KeyListener {
 
     private boolean paused = false;
 
+    /**
+     * LevelManager is used to control the levels in the game by staring and stopping them. Each level will carry the same LevelManager instance so the integrity of the game is maintained.
+     * @param world Add the current instance of yhe world that the game is being played on.
+     * @param frame Add the current instance of the frame so a KeyListener can be implemented.
+     * @param interfaceRenderer Add the current instance of the interfaceRenderer so the level manager knows when to skip levels.
+     */
+
     public LevelManager(World world, JFrame frame, InterfaceRenderer interfaceRenderer){
 
         this.currentLevel = LevelContext.MENU;
@@ -37,6 +47,11 @@ public class LevelManager implements KeyListener {
 
     }
 
+    /**
+     * startLevel is used to start each game level and the main menu.
+     * @param level Add the desired level that you wish to start.
+     */
+
     public void startLevel(LevelContext level){
 
         switch (level){
@@ -44,6 +59,9 @@ public class LevelManager implements KeyListener {
             case MENU:
                 this.currentLevel = LevelContext.MENU;
                 this.menu = new Menu(this, world, frame);
+                this.interfaceRenderer.renderMenuPanel();
+                this.interfaceRenderer.resetBoxCount();
+                this.interfaceRenderer.resetBlobCount();
                 break;
             case ONE:
                 this.currentLevel = LevelContext.ONE;
@@ -60,10 +78,22 @@ public class LevelManager implements KeyListener {
                 this.levelThree = new LevelThree(this, world, frame);
                 renderInterface(0,0);
                 break;
+            case END:
+                this.currentLevel = LevelContext.MENU;
+                this.menu = new Menu(this, world, frame);
+                this.interfaceRenderer.renderHighScorePanel();
+                this.interfaceRenderer.resetBoxCount();
+                this.interfaceRenderer.resetBlobCount();
+                break;
 
         }
 
     }
+
+    /**
+     * stopLevel is used to stop each game level and the main menu.
+     * @param level Add the desired level that you wish to stop.
+     */
 
     public void stopLevel(LevelContext level){
 
@@ -94,11 +124,22 @@ public class LevelManager implements KeyListener {
 
     }
 
+    /**
+     * renderInterface is used to render the user interface below the game showing the game stats.
+     * @param blobs Add the current number of enemies that have escaped.
+     * @param boxes Add the current number of boxes used.
+     */
+
     public void renderInterface(int blobs, int boxes){
 
         this.interfaceRenderer.render(blobs, boxes, false);
 
     }
+
+    /**
+     * getInterfaceRenderer returns the current interfaceRenderer instance.
+     * @return
+     */
 
     public InterfaceRenderer getInterfaceRenderer() {
 
@@ -106,11 +147,20 @@ public class LevelManager implements KeyListener {
 
     }
 
+    /**
+     * getCurrentLevel returns the level that is currently being played.
+     * @return
+     */
+
     public LevelContext getCurrentLevel() {
 
         return currentLevel;
 
     }
+
+    /**
+     * clearBodies destroys all DynamicBodies on the world. Used when switching levels to clear the world.
+     */
 
     public void clearBodies(){
 
@@ -120,12 +170,17 @@ public class LevelManager implements KeyListener {
 
     }
 
+    /**
+     * keyPressed in this context is used to pause the game when the ESC key is pressed. Currently WIP.
+     * @param e An object containing the KeyPressed event information.
+     */
+
     @Override
     public void keyPressed(KeyEvent e){
 
         if (e.getKeyCode() == 27){
 
-            world.stop();
+            //world.stop();
 
         }
 

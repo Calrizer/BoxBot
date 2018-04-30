@@ -1,14 +1,8 @@
 
 import city.cs.engine.*;
-import org.jbox2d.common.Vec2;
-
 import javax.swing.*;
-import java.awt.*;
-import java.util.Timer;
 
 public class Main {
-
-    private static Bot bot;
 
     public static void main(String[] args) {
 
@@ -20,6 +14,8 @@ public class Main {
 
         InterfaceRenderer interfaceRenderer = new InterfaceRenderer(frame, view);
 
+        System.out.println("Interface: Loaded");
+
         //JFrame debugView = new DebugViewer(world, 1000, 500);
 
         view.addMouseListener(new MouseHandler(view));
@@ -29,14 +25,14 @@ public class Main {
 
         new WorldRenderer(world);
 
+        System.out.println("World: Rendered");
+
         LevelManager levelManager = new LevelManager(world, frame, interfaceRenderer);
 
         interfaceRenderer.addLevelManager(levelManager);
 
-    }
+        System.out.println("Game Running!");
 
-    public Bot getBot(){
-        return bot;
     }
 
 }

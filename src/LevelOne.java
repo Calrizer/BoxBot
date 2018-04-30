@@ -37,7 +37,7 @@ public class LevelOne implements Level, StepListener{
     @Override
     public void start() {
 
-
+        this.levelManager.getInterfaceRenderer().changeBackground(1);
 
     }
 

@@ -5,9 +5,21 @@ import city.cs.engine.World;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * @author Callum Drain
+ */
+
 public class MainView extends UserView{
 
     private Image background;
+
+    /**
+     * Constructor for the MainView.
+     * @param world The current instance of the World to render a view onto it.
+     * @param width The width of the view to be rendered.
+     * @param height The height of the view to be rendered.
+     * @param level The current level to render correct background.
+     */
 
     public MainView(World world, int width, int height, int level) {
 
@@ -27,6 +39,11 @@ public class MainView extends UserView{
         }
 
     }
+
+    /**
+     * Renders the background image.
+     * @param g Graphics context allowing background image to be rendered.
+     */
 
     @Override
     protected void paintBackground(Graphics2D g){
